@@ -130,6 +130,7 @@ def build_axial_deeplab_backbone(cfg, input_shape):
     deform_modulated = cfg.MODEL.RESNETS.DEFORM_MODULATED
     deform_num_groups = cfg.MODEL.RESNETS.DEFORM_NUM_GROUPS
     res5_multi_grid = cfg.MODEL.RESNETS.RES5_MULTI_GRID
+    res5_axial = cfg.MODEL.RESNETS.AXIAL_BLOCK5
     # fmt: on
     # cut ASPP part
     
@@ -187,7 +188,7 @@ def build_axial_deeplab_backbone(cfg, input_shape):
             stage_kargs["deform_num_groups"] = deform_num_groups
         else:
             stage_kargs["block_class"] = BottleneckBlock
-        if stage_idx == 5:
+        if stage_idx == 5 and res5_axial:
             stage_kargs['block_class']=AxialBlock
             '''stage_kargs.pop("dilation")
             stage_kargs["dilation_per_block"] = [
