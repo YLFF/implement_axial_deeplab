@@ -131,6 +131,7 @@ def build_axial_deeplab_backbone(cfg, input_shape):
     deform_num_groups = cfg.MODEL.RESNETS.DEFORM_NUM_GROUPS
     res5_multi_grid = cfg.MODEL.RESNETS.RES5_MULTI_GRID
     res5_axial = cfg.MODEL.RESNETS.AXIAL_BLOCK5
+    axial_kernel_size=cfg.MODEL.RESNETS.KERNEL_SIZE
     # fmt: on
     # cut ASPP part
     
@@ -194,7 +195,7 @@ def build_axial_deeplab_backbone(cfg, input_shape):
             stage_kargs["dilation_per_block"] = [
                 dilation * mg for mg in res5_multi_grid
             ]'''  #mg=[1,2,4]   eg dilation5=4, dilationperblock=[4,8,16]
-            blocks=ResNet.make_stage(AxialBlock,num_blocks=num_blocks_per_stage[idx],in_channels=in_channels,out_channels=out_channels)
+            blocks=ResNet.make_stage(AxialBlock,num_blocks=num_blocks_per_stage[idx],in_channels=in_channels,out_channels=out_channels,kernel_size=axial_kernel_size[idx])
         else:
             blocks = ResNet.make_stage(**stage_kargs)
         in_channels = out_channels
