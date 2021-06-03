@@ -36,9 +36,9 @@ im = cv2.imread("test.png")
 cfg = get_cfg()
 add_panoptic_deeplab_config(cfg)
 
-cfg.merge_from_file("./configs./Attention_PanopticDeepLab.yaml")
+cfg.merge_from_file("configs./Attention_PanopticDeepLab.yaml")
 
-cfg.MODEL.WEIGHTS = ("./model/axial5.pkl")
+#cfg.MODEL.WEIGHTS = ("axial5.pkl")
 predictor = DefaultPredictor(cfg)
 panoptic_seg, segments_info = predictor(im)["panoptic_seg"]
 v = Visualizer(im[:, :, ::-1], MetadataCatalog.get(cfg.DATASETS.TRAIN[0]), scale=1.2)
