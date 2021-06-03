@@ -132,8 +132,9 @@ def build_axial_deeplab_backbone(cfg, input_shape):
     res5_multi_grid = cfg.MODEL.RESNETS.RES5_MULTI_GRID
     # fmt: on
     # cut ASPP part
-    '''
+    
     assert res4_dilation in {1, 2}, "res4_dilation cannot be {}.".format(res4_dilation)
+    '''
     assert res5_dilation in {1, 2, 4}, "res5_dilation cannot be {}.".format(res5_dilation)
     if res4_dilation == 2:
         # Always dilate res5 if res4 is dilated.
