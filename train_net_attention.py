@@ -5,7 +5,7 @@
 Panoptic-DeepLab Training Script.
 This script is a simplified version of the training script in detectron2/tools.
 """
-DETECTRON2_DATASETS='/home/wangzhilin/work/code/project2021/datasets'
+'''DETECTRON2_DATASETS='my/datasets/''''
 import os
 import torch
 from torchsummary import summary
@@ -142,12 +142,12 @@ def setup(args):
     cfg = get_cfg()
     add_panoptic_deeplab_config(cfg)
     #cfg.CUDNN_BENCHMARK=True
-    cfg.merge_from_file('/home/wangzhilin/detectron2/projects/Panoptic-DeepLab/configs/Cityscapes-PanopticSegmentation/panoptic_deeplab_R_52_os16_mg124_poly_90k_bs32_crop_512_1024_dsconv.yaml')
+    cfg.merge_from_file('configs/Attention_PanopticDeepLab.yaml')
     cfg.merge_from_list(args.opts)
     cfg.SOLVER.IMS_PER_BATCH = 8
     #cfg.MODEL.BACKBONE_NAME='build_axial_deeplab_backbone'
-    cfg.MODEL.WEIGHTS='/home/wangzhilin/work/code/project2021/detectron2/models/Panoptic_deeplab_R52_DC5/model_final_23d03a.pkl' 
-    cfg.OUTPUT_DIR = '/home/wangzhilin/work/code/project2021/detectron2/panopticseg/test/'
+    #cfg.MODEL.WEIGHTS='' 
+    #cfg.OUTPUT_DIR = ''
     cfg.freeze()
     default_setup(cfg, args)
     return cfg
@@ -172,10 +172,8 @@ def main(args):
 
 if __name__ == "__main__":
     args = default_argument_parser().parse_args()
-    args.num_gpus=1
-    args.num_gpus=1
     args.dist_url='auto'
-    args.eval_only=True
+    #args.eval_only=True
 
     
     print("Command Line Args:", args)
